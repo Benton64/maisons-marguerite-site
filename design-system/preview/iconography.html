@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Iconography</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--mm-bg); padding: 24px 40px; box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 20px; align-items: center; }
+  .row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 26px; align-items: center; justify-items: center; }
+  .icon { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .icon i, .icon svg { color: var(--mm-bronze); width: 24px; height: 24px; stroke-width: 1.5; }
+  .name { font-family: var(--mm-font-body); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mm-bronze); }
+  .meta { font-family: var(--mm-font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mm-bronze); }
+</style></head>
+<body class="mm-base">
+  <div class="meta">Lucide · stroke 1.5 · bronze</div>
+  <div class="row">
+    <div class="icon"><i data-lucide="map-pin"></i><span class="name">map-pin</span></div>
+    <div class="icon"><i data-lucide="bed-double"></i><span class="name">bed-double</span></div>
+    <div class="icon"><i data-lucide="utensils"></i><span class="name">utensils</span></div>
+    <div class="icon"><i data-lucide="trees"></i><span class="name">trees</span></div>
+    <div class="icon"><i data-lucide="wind"></i><span class="name">wind</span></div>
+    <div class="icon"><i data-lucide="key-round"></i><span class="name">key-round</span></div>
+    <div class="icon"><i data-lucide="calendar"></i><span class="name">calendar</span></div>
+    <div class="icon"><i data-lucide="arrow-right"></i><span class="name">arrow-right</span></div>
+  </div>
+  <script>lucide.createIcons();</script>
+</body></html>

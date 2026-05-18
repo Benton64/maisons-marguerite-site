@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Shadows</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--mm-bg); padding: 32px 40px; box-sizing: border-box; min-height: 100vh; display: flex; align-items: center; justify-content: space-around; gap: 16px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .swatch { width: 160px; height: 110px; background: var(--mm-bg-alt); border: 1px solid var(--mm-border); border-radius: 4px; }
+  .none { box-shadow: none; }
+  .card { box-shadow: var(--mm-shadow-card); }
+  .lift { box-shadow: var(--mm-shadow-lift); }
+  .name { font-family: var(--mm-font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mm-bronze); }
+</style></head>
+<body class="mm-base">
+  <div class="item"><div class="swatch none"></div><div class="name">Au repos</div></div>
+  <div class="item"><div class="swatch card"></div><div class="name">Shadow · card</div></div>
+  <div class="item"><div class="swatch lift"></div><div class="name">Shadow · lift</div></div>
+</body></html>

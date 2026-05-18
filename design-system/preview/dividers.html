@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Dividers & Eyebrows</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--mm-bg); padding: 24px 40px; box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 26px; max-width: 600px; margin: 0 auto; }
+  .eyebrow { display: flex; align-items: center; gap: 16px; }
+  .eyebrow .line { flex: 1; height: 1px; background: var(--mm-bronze); opacity: 0.4; }
+  .eyebrow .text { font-family: var(--mm-font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mm-bronze); }
+  .hr { height: 1px; background: var(--mm-border); }
+  .hr-bronze { height: 1px; background: var(--mm-bronze); opacity: 0.4; }
+  .hr-dotted { border: 0; border-top: 1px dashed var(--mm-bronze); opacity: 0.5; }
+  .lbl { font-family: var(--mm-font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mm-bronze); }
+</style></head>
+<body class="mm-base">
+  <div class="eyebrow"><div class="line"></div><div class="text">Nos maisons</div><div class="line"></div></div>
+  <div><div class="hr"></div><div class="lbl" style="margin-top:6px;">Hairline · #D4C5B0</div></div>
+  <div><div class="hr-bronze"></div><div class="lbl" style="margin-top:6px;">Bronze 40% · pour le texte</div></div>
+  <div><hr class="hr-dotted"><div class="lbl" style="margin-top:6px;">Pointillé · usage rare</div></div>
+</body></html>

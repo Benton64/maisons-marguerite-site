@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Card — Rest & Hover</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--mm-bg); padding: 24px 36px; box-sizing: border-box; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: center; }
+  .card { padding: 22px; height: 230px; display: flex; flex-direction: column; justify-content: space-between; }
+  .hover { background: var(--mm-card-hover); border-color: rgba(45,74,62,0.25); box-shadow: var(--mm-shadow-card); }
+  .ph { width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #C7B89E, #8B6F4E); border-radius: 2px; }
+  .meta { display: flex; justify-content: space-between; align-items: flex-end; }
+  .pname { font-family: var(--mm-font-display); font-size: 22px; color: var(--mm-forest); letter-spacing: 0.02em; }
+  .pmeta { font-family: var(--mm-font-body); font-size: 12px; color: var(--mm-bronze); letter-spacing: 0.08em; text-transform: uppercase; }
+  .tag { position: absolute; top: 14px; left: 14px; background: var(--mm-bg); padding: 4px 10px; font-family: var(--mm-font-body); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mm-forest); }
+  .cardwrap { position: relative; }
+</style></head>
+<body class="mm-base">
+  <div class="cardwrap">
+    <div class="mm-card card">
+      <div class="ph"></div>
+      <div class="meta"><div class="pname">Maison Périgord</div><div class="pmeta">6 invités</div></div>
+    </div>
+  </div>
+  <div class="cardwrap">
+    <div class="mm-card card hover">
+      <div class="ph"></div>
+      <div class="meta"><div class="pname">Maison Périgord</div><div class="pmeta">Au survol →</div></div>
+    </div>
+  </div>
+</body></html>
