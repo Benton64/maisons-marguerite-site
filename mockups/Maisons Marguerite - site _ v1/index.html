@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maisons Marguerite — Prototype</title>
+<style>
+  :root {
+    --shell-bg: #1a1a1a;
+    --shell-fg: #f6f4ef;
+    --shell-muted: rgba(246, 244, 239, 0.55);
+    --shell-border: rgba(246, 244, 239, 0.12);
+    --shell-accent: #8B6F4E;
+    --shell-active: #f6f4ef;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--shell-bg);
+    color: var(--shell-fg);
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    overflow: hidden;
+  }
+  .shell {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--shell-border);
+    background: linear-gradient(180deg, rgba(35,33,28,0.96), rgba(20,20,20,0.92));
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+  .topbar__brand {
+    display: flex; align-items: center; gap: 12px;
+    font-family: "DM Sans", sans-serif;
+    color: var(--shell-fg);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .topbar__brand b {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--shell-fg);
+  }
+  .topbar__brand .dot { width: 6px; height: 6px; background: var(--shell-accent); border-radius: 50%; }
+
+  .topbar__center {
+    display: flex; justify-content: center;
+  }
+  .viewport-switch {
+    display: inline-flex;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--shell-border);
+    border-radius: 6px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .viewport-switch button {
+    background: none; border: 0; padding: 8px 14px;
+    color: var(--shell-muted);
+    font: inherit; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 200ms ease;
+    font-weight: 500;
+  }
+  .viewport-switch button:hover { color: var(--shell-fg); }
+  .viewport-switch button.is-active {
+    background: rgba(246,244,239,0.95);
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+  .viewport-switch button .px {
+    opacity: 0.6;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+  }
+  .viewport-switch button.is-active .px { opacity: 0.7; }
+
+  .topbar__right {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .route-tag {
+    font-family: "DM Sans", sans-serif;
+    color: var(--shell-muted);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--shell-border);
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .route-tag b { color: var(--shell-fg); font-weight: 600; }
+
+  /* Stage / iframe ---------------------------------------------
+     Stage is a positioned block that fills the remaining viewport
+     height; the device sits centered inside it.
+  */
+  .stage {
+    position: relative;
+    overflow: auto;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(139,111,78,0.06), transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(45,74,62,0.08), transparent 60%),
+      #0e0e0e;
+  }
+  .stage-inner {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .frame-wrap {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    transition: padding 300ms ease;
+  }
+  .frame-wrap--mobile {
+    padding: 28px 16px 32px;
+    align-items: flex-start;
+  }
+  .frame-wrap--desktop {
+    padding: 0;
+    align-items: stretch;
+  }
+  .device {
+    transition: width 320ms cubic-bezier(0.22,0.61,0.36,1),
+                box-shadow 320ms ease,
+                border-radius 320ms ease;
+    background: #F7F3EC;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .device--mobile {
+    width: 390px;
+    max-width: 100%;
+    height: 844px;
+    flex: 0 0 auto;
+    border-radius: 36px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55),
+                0 0 0 8px rgba(40,40,40,0.6),
+                0 0 0 9px rgba(255,255,255,0.06);
+  }
+  .device--desktop {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    flex: 1 1 auto;
+    align-self: stretch;
+  }
+  .device iframe {
+    width: 100%;
+    flex: 1 1 auto;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: #F7F3EC;
+  }
+  .device--mobile iframe { height: 100%; }
+
+  @media (max-width: 720px) {
+    .topbar { grid-template-columns: 1fr; gap: 10px; padding: 10px 14px; }
+    .topbar__brand { font-size: 11px; }
+    .topbar__brand b { font-size: 18px; }
+    .topbar__right { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="dot"></span>
+      <b>Les Maisons de Marguerite</b>
+      <span>·  Prototype</span>
+    </div>
+    <div class="topbar__center">
+      <div class="viewport-switch" role="tablist" aria-label="Viewport">
+        <button id="vp-mobile" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          Mobile <span class="px">390</span>
+        </button>
+        <button id="vp-desktop" role="tab" class="is-active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Desktop <span class="px">1280</span>
+        </button>
+      </div>
+    </div>
+    <div class="topbar__right">
+      <span class="route-tag">Route · <b id="route-display">/</b></span>
+      <span class="route-tag">Lang · <b id="lang-display">FR</b></span>
+    </div>
+  </header>
+
+  <div class="stage" id="stage">
+    <div class="stage-inner">
+      <div class="frame-wrap frame-wrap--desktop" id="frameWrap">
+        <div class="device device--desktop" id="device">
+          <iframe id="appframe" src="site.html" title="Maisons Marguerite — site" allow="clipboard-write"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* Viewport switcher + iframe message bridge for Tweaks. */
+  (function () {
+    const $vpMobile = document.getElementById("vp-mobile");
+    const $vpDesktop = document.getElementById("vp-desktop");
+    const $device = document.getElementById("device");
+    const $wrap = document.getElementById("frameWrap");
+    const $iframe = document.getElementById("appframe");
+    const $route = document.getElementById("route-display");
+    const $lang = document.getElementById("lang-display");
+
+    let currentMode = "desktop";
+
+    function setMode(mode) {
+      currentMode = mode;
+      $device.classList.remove("device--mobile", "device--desktop");
+      $device.classList.add("device--" + mode);
+      $wrap.classList.remove("frame-wrap--mobile", "frame-wrap--desktop");
+      $wrap.classList.add("frame-wrap--" + mode);
+      $vpMobile.classList.toggle("is-active", mode === "mobile");
+      $vpDesktop.classList.toggle("is-active", mode === "desktop");
+      try {
+        $iframe.contentWindow.postMessage({
+          type: "mm_viewport",
+          mode,
+          width: mode === "mobile" ? 390 : 1280,
+        }, "*");
+      } catch (e) {}
+    }
+    $vpMobile.addEventListener("click", () => setMode("mobile"));
+    $vpDesktop.addEventListener("click", () => setMode("desktop"));
+
+    /* Reflect hash + lang from iframe in topbar */
+    function updateRouteDisplay() {
+      try {
+        const hash = $iframe.contentWindow.location.hash || "#/";
+        $route.textContent = hash.replace(/^#/, "") || "/";
+        const lang = $iframe.contentWindow.localStorage.getItem("mm-lang");
+        if (lang) $lang.textContent = lang.toUpperCase();
+      } catch (e) {}
+    }
+    setInterval(updateRouteDisplay, 500);
+    $iframe.addEventListener("load", () => {
+      setTimeout(() => setMode(currentMode), 80);
+      updateRouteDisplay();
+    });
+
+    /* Bridge Tweaks messages between host (top window) <-> iframe.
+       The tweaks-panel.jsx starter posts to window.parent (this index.html),
+       and listens on window for activate/deactivate. We forward both ways. */
+    window.addEventListener("message", (e) => {
+      const data = e.data;
+      if (!data || !data.type) return;
+      // From iframe → forward to host (top)
+      if (e.source === $iframe.contentWindow) {
+        if (
+          data.type === "__edit_mode_available" ||
+          data.type === "__edit_mode_set_keys" ||
+          data.type === "__edit_mode_dismissed"
+        ) {
+          try { window.parent.postMessage(data, "*"); } catch (err) {}
+        }
+        return;
+      }
+      // From host → forward to iframe
+      if (
+        data.type === "__activate_edit_mode" ||
+        data.type === "__deactivate_edit_mode"
+      ) {
+        try { $iframe.contentWindow.postMessage(data, "*"); } catch (err) {}
+      }
+    });
+  })();
+</script>
+</body>
+</html>

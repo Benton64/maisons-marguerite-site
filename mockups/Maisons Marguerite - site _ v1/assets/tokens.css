@@ -1,0 +1,274 @@
+/* ============================================================
+   Les Maisons de Marguerite — Foundations
+   Colors, Type, Spacing — exact brand tokens
+   ============================================================ */
+
+/* ----- Web fonts (Google Fonts substitutes; confirm w/ brand) ----- */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap");
+
+:root {
+  /* ---------- Color — exact brand values, no substitutions ---------- */
+  --mm-bg:            #F7F3EC;  /* General background — warm linen        */
+  --mm-bg-alt:        #FAFAF8;  /* Alternating sections — softer ivory    */
+  --mm-card-hover:    #E8F0EC;  /* Card hover — pale green echo of forest */
+  --mm-ink:           #1A1A1A;  /* Body copy — near-black                 */
+  --mm-forest:        #2D4A3E;  /* Titles, CTAs, footer ground            */
+  --mm-bronze:        #8B6F4E;  /* Accents, icons, labels, separators     */
+  --mm-bronze-soft:   #D4C5B0;  /* Borders, footer text on forest         */
+  --mm-paper:         #FFFFFF;  /* CTA text on forest                     */
+
+  /* Semantic aliases */
+  --mm-fg:            var(--mm-ink);
+  --mm-fg-muted:      var(--mm-bronze);
+  --mm-fg-display:    var(--mm-forest);
+  --mm-border:        var(--mm-bronze-soft);
+  --mm-bg-footer:     var(--mm-forest);
+  --mm-fg-on-forest:  var(--mm-bronze-soft);
+  --mm-cta-bg:        var(--mm-forest);
+  --mm-cta-fg:        var(--mm-paper);
+
+  /* ---------- Typography ---------- */
+  --mm-font-display:  "Cormorant Garamond", "EB Garamond", Garamond, serif;
+  --mm-font-body:     "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --mm-font-italic:   "Cormorant Garamond", serif;
+
+  /* Display scale — desktop */
+  --mm-h1-size: 64px;
+  --mm-h2-size: 40px;
+  --mm-h3-size: 28px;
+  --mm-display-lh: 1.1;
+  --mm-display-ls: 0.02em;
+  --mm-display-weight: 400;
+
+  /* Body */
+  --mm-body-size: 17px;
+  --mm-body-lh: 1.6;
+  --mm-body-weight: 400;
+
+  /* Label — uppercase eyebrows */
+  --mm-label-size: 13px;
+  --mm-label-weight: 500;
+  --mm-label-ls: 0.08em;
+
+  /* MAISON MARGUERITE-style petites capitales */
+  --mm-allcaps-ls: 0.18em;
+
+  /* ---------- Spacing scale ---------- */
+  --mm-space-1:  4px;
+  --mm-space-2:  8px;
+  --mm-space-3: 12px;
+  --mm-space-4: 16px;
+  --mm-space-5: 24px;
+  --mm-space-6: 32px;
+  --mm-space-7: 48px;
+  --mm-space-8: 64px;
+  --mm-space-9: 96px;
+  --mm-space-10: 128px;
+
+  /* ---------- Radii — restrained, almost square ---------- */
+  --mm-radius-none: 0;
+  --mm-radius-sm:   2px;   /* default — barely there                     */
+  --mm-radius-md:   4px;   /* cards, inputs                              */
+  --mm-radius-pill: 999px; /* labels, tags occasionally                  */
+
+  /* ---------- Borders ---------- */
+  --mm-border-hair:    1px solid var(--mm-border);
+  --mm-border-divider: 1px solid rgba(139, 111, 78, 0.18);
+
+  /* ---------- Shadows — soft, rare, never glossy ---------- */
+  --mm-shadow-card:  0 1px 2px rgba(45, 74, 62, 0.04), 0 8px 24px rgba(45, 74, 62, 0.06);
+  --mm-shadow-lift:  0 2px 6px rgba(45, 74, 62, 0.06), 0 18px 48px rgba(45, 74, 62, 0.10);
+
+  /* ---------- Motion ---------- */
+  --mm-ease:     cubic-bezier(0.22, 0.61, 0.36, 1);   /* gentle, editorial */
+  --mm-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mm-dur-fast: 200ms;
+  --mm-dur-med:  400ms;
+  --mm-dur-slow: 800ms;
+
+  /* ---------- Layout ---------- */
+  --mm-max-w: 1280px;
+  --mm-gutter: 32px;
+}
+
+/* ---------- Mobile overrides ---------- */
+@media (max-width: 720px) {
+  :root {
+    --mm-h1-size: 36px;
+    --mm-h2-size: 28px;
+    --mm-h3-size: 22px;
+    --mm-body-size: 16px;
+    --mm-gutter: 20px;
+  }
+}
+
+/* ============================================================
+   Base element styles — drop into pages via class on <body>
+   ============================================================ */
+.mm-base {
+  background: var(--mm-bg);
+  color: var(--mm-fg);
+  font-family: var(--mm-font-body);
+  font-size: var(--mm-body-size);
+  line-height: var(--mm-body-lh);
+  font-weight: var(--mm-body-weight);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.mm-h1,
+.mm-h2,
+.mm-h3 {
+  font-family: var(--mm-font-display);
+  font-weight: var(--mm-display-weight);
+  color: var(--mm-fg-display);
+  letter-spacing: var(--mm-display-ls);
+  line-height: var(--mm-display-lh);
+  margin: 0;
+}
+.mm-h1 { font-size: var(--mm-h1-size); }
+.mm-h2 { font-size: var(--mm-h2-size); }
+.mm-h3 { font-size: var(--mm-h3-size); }
+
+.mm-italic {
+  font-family: var(--mm-font-italic);
+  font-style: italic;
+  color: var(--mm-fg-display);
+}
+
+.mm-label {
+  font-family: var(--mm-font-body);
+  font-size: var(--mm-label-size);
+  font-weight: var(--mm-label-weight);
+  letter-spacing: var(--mm-label-ls);
+  text-transform: uppercase;
+  color: var(--mm-bronze);
+}
+
+.mm-allcaps {
+  text-transform: uppercase;
+  letter-spacing: var(--mm-allcaps-ls);
+}
+
+.mm-body  { font-size: var(--mm-body-size); line-height: var(--mm-body-lh); color: var(--mm-fg); }
+.mm-muted { color: var(--mm-bronze); }
+
+/* ---------- Wood-texture utility (Niveau 2: opacity 10%) ---------- */
+.mm-wood {
+  position: relative;
+  isolation: isolate;
+}
+.mm-wood::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      92deg,
+      rgba(139, 111, 78, 0.10) 0,
+      rgba(139, 111, 78, 0.04) 1px,
+      rgba(139, 111, 78, 0.10) 3px,
+      rgba(139, 111, 78, 0.02) 7px,
+      rgba(139, 111, 78, 0.08) 14px
+    ),
+    repeating-linear-gradient(
+      88deg,
+      rgba(45, 74, 62, 0.03) 0,
+      transparent 80px,
+      rgba(45, 74, 62, 0.05) 160px,
+      transparent 240px
+    );
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+.mm-wood > * { position: relative; z-index: 1; }
+
+/* ---------- Buttons ---------- */
+.mm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: var(--mm-font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--mm-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--mm-dur-fast) var(--mm-ease),
+              color var(--mm-dur-fast) var(--mm-ease),
+              border-color var(--mm-dur-fast) var(--mm-ease),
+              transform var(--mm-dur-fast) var(--mm-ease);
+  text-decoration: none;
+}
+.mm-btn--primary {
+  background: var(--mm-cta-bg);
+  color: var(--mm-cta-fg);
+}
+.mm-btn--primary:hover { background: #25403A; }
+.mm-btn--primary:active { transform: translateY(1px); }
+
+.mm-btn--ghost {
+  background: transparent;
+  color: var(--mm-forest);
+  border-color: var(--mm-forest);
+}
+.mm-btn--ghost:hover { background: var(--mm-forest); color: var(--mm-paper); }
+
+.mm-btn--link {
+  background: transparent;
+  color: var(--mm-bronze);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--mm-bronze);
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: var(--mm-label-ls);
+  font-size: var(--mm-label-size);
+}
+.mm-btn--link:hover { color: var(--mm-forest); border-color: var(--mm-forest); }
+
+/* ---------- Cards ---------- */
+.mm-card {
+  background: var(--mm-bg-alt);
+  border: var(--mm-border-hair);
+  border-radius: var(--mm-radius-md);
+  transition: background-color var(--mm-dur-med) var(--mm-ease),
+              transform var(--mm-dur-med) var(--mm-ease),
+              box-shadow var(--mm-dur-med) var(--mm-ease);
+}
+.mm-card:hover {
+  background: var(--mm-card-hover);
+  box-shadow: var(--mm-shadow-card);
+}
+
+/* ---------- Inputs ---------- */
+.mm-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--mm-bg);
+  border: 1px solid var(--mm-border);
+  border-radius: var(--mm-radius-sm);
+  font-family: var(--mm-font-body);
+  font-size: var(--mm-body-size);
+  color: var(--mm-fg);
+  transition: border-color var(--mm-dur-fast) var(--mm-ease);
+}
+.mm-input:focus {
+  outline: none;
+  border-color: var(--mm-forest);
+}
+.mm-input::placeholder { color: var(--mm-bronze); opacity: 0.7; }
+
+/* ---------- Hairline divider ---------- */
+.mm-divider {
+  height: 1px;
+  background: var(--mm-border);
+  border: 0;
+  margin: var(--mm-space-7) 0;
+}
+.mm-divider--bronze {
+  background: var(--mm-bronze);
+  opacity: 0.4;
+}
