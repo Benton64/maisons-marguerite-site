@@ -1,13 +1,25 @@
+import { LangProvider } from '@/components/LangContext'
+import Nav from '@/components/ui/Nav'
+import Hero from '@/components/sections/Hero'
+import Footer from '@/components/ui/Footer'
+import BrandAndProperties from '@/components/sections/BrandAndProperties'
+import ContactSection from '@/components/sections/ContactSection'
+
+export const metadata = {
+  title: 'Les Maisons de Marguerite — Des maisons habitées, jamais mises en scène',
+  description: "Trois adresses choisies en France : L'Aubade en Dordogne, Jaulerry à Biarritz, Iéna à Paris 16e.",
+}
+
 export default function HomePage() {
   return (
-    <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '16px' }}>
-      <img src="/logo/MaisonMarguerite-OneColorBG.svg" alt="Les Maisons de Marguerite" style={{ width: 200 }} />
-      <h1 style={{ fontFamily: 'var(--mm-font-display)', color: 'var(--mm-forest)', fontSize: 'var(--mm-h2-size)' }}>
-        Les Maisons de Marguerite
-      </h1>
-      <p style={{ fontFamily: 'var(--mm-font-body)', color: 'var(--mm-bronze)', fontStyle: 'italic' }}>
-        Des maisons habitées, jamais mises en scène.
-      </p>
-    </main>
+    <LangProvider>
+      <Nav />
+      <main>
+        <Hero />
+        <BrandAndProperties />
+        <ContactSection />
+      </main>
+      <Footer />
+    </LangProvider>
   )
 }
