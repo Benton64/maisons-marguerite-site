@@ -75,9 +75,6 @@ export default function PropertyContent({ slug }) {
         </div>
       </section>
 
-      {/* Photo gallery */}
-      <PhotoGallery photos={photos.gallery} title={t.title} />
-
       {/* Key info + lede */}
       <section style={{ background: 'var(--mm-bg)', padding: 'var(--mm-space-9) var(--mm-gutter)' }}>
         <div style={{ maxWidth: 'var(--mm-max-w)', margin: '0 auto' }}>
@@ -142,6 +139,9 @@ export default function PropertyContent({ slug }) {
           </div>
         </div>
       </motion.section>
+
+      {/* Photo gallery — after description, before equipment */}
+      <PhotoGallery photos={photos.gallery} title={t.title} />
 
       {/* Equipment — Aubade only */}
       {t.equip && (
