@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Check, ChevronDown, ChevronUp, Waves, BedDouble, Flame, Wifi, KeyRound, Mountain, Monitor, Car, Bath, MapPin, Trees, Layers, Thermometer } from 'lucide-react'
 import { useLang } from '@/components/LangContext'
 import { content, properties } from '@/lib/content'
+import PhotoGallery from '@/components/ui/PhotoGallery'
 
 const ICONS = { Waves, BedDouble, Flame, Wifi, KeyRound, Mountain, Monitor, Car, Bath, MapPin, Trees, Layers, Thermometer }
 
@@ -73,6 +74,9 @@ export default function PropertyContent({ slug }) {
           </motion.div>
         </div>
       </section>
+
+      {/* Photo gallery */}
+      <PhotoGallery photos={photos.gallery} title={t.title} />
 
       {/* Key info + lede */}
       <section style={{ background: 'var(--mm-bg)', padding: 'var(--mm-space-9) var(--mm-gutter)' }}>
